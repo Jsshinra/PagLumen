@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lumen — Reproductor de música local para Windows</title>
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     :root {
       --bg: #09090b;
@@ -19,7 +26,9 @@
       --accent-glow: rgba(167, 139, 250, 0.3);
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif;
@@ -40,69 +49,116 @@
       will-change: transform, opacity;
       transition: none;
     }
+
     .orb-1 {
-      top: 10%; left: 30%;
-      width: 600px; height: 600px;
+      top: 10%;
+      left: 30%;
+      width: 600px;
+      height: 600px;
       background: radial-gradient(circle, #3b3b42 0%, #27272a 60%, transparent 100%);
     }
+
     .orb-2 {
-      top: 40%; right: 15%;
-      width: 700px; height: 700px;
+      top: 40%;
+      right: 15%;
+      width: 700px;
+      height: 700px;
       background: radial-gradient(circle, #35354a 0%, #27272a 60%, transparent 100%);
     }
+
     .orb-3 {
-      bottom: 15%; left: 40%;
-      width: 500px; height: 500px;
+      bottom: 15%;
+      left: 40%;
+      width: 500px;
+      height: 500px;
       background: radial-gradient(circle, #3a3548 0%, #27272a 60%, transparent 100%);
     }
 
     /* ── NAV ── */
-    nav, .hero, .features, .download, footer {
+    nav,
+    .hero,
+    .features,
+    .download,
+    footer {
       position: relative;
       z-index: 1;
     }
 
     /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 1rem 2rem;
       background: rgba(9, 9, 11, 0.8);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(63, 63, 70, 0.4);
     }
+
     .nav-logo {
-      font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
       color: var(--text);
       text-decoration: none;
     }
-    .nav-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
     .nav-links a {
-      color: var(--text-muted); text-decoration: none; font-size: 0.9rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--text); }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
 
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       padding: 6rem 2rem 4rem;
       position: relative;
     }
+
     .hero::before {
       content: '';
-      position: absolute; top: -40%; left: 50%; transform: translateX(-50%);
-      width: 600px; height: 600px;
+      position: absolute;
+      top: -40%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
       background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
       opacity: 0.5;
     }
+
     .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       padding: 0.4rem 1rem;
       border: 1px solid var(--border);
       border-radius: 999px;
@@ -111,15 +167,27 @@
       margin-bottom: 2rem;
       background: var(--surface);
     }
+
     .hero-badge .dot {
-      width: 6px; height: 6px; border-radius: 50%;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
       background: #4ade80;
       animation: pulse-dot 2s infinite;
     }
+
     @keyframes pulse-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
     }
+
     .hero h1 {
       font-size: clamp(3.5rem, 10vw, 7rem);
       font-weight: 800;
@@ -131,37 +199,52 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+
     .hero p {
       font-size: clamp(1.1rem, 2.5vw, 1.35rem);
       color: var(--text-muted);
       max-width: 520px;
       margin-bottom: 2.5rem;
     }
-    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
     .btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       padding: 0.85rem 2rem;
       border-radius: 12px;
-      font-size: 1rem; font-weight: 600;
+      font-size: 1rem;
+      font-weight: 600;
       text-decoration: none;
       transition: all 0.25s;
-      cursor: pointer; border: none;
+      cursor: pointer;
+      border: none;
     }
+
     .btn-primary {
       background: var(--accent);
       color: #09090b;
     }
+
     .btn-primary:hover {
       background: #8b5cf6;
       box-shadow: 0 0 30px var(--accent-glow);
       transform: translateY(-2px);
     }
+
     .btn-ghost {
       background: transparent;
       color: var(--text-muted);
       border: 1px solid var(--border);
     }
+
     .btn-ghost:hover {
       background: var(--surface);
       color: var(--text);
@@ -174,22 +257,30 @@
       max-width: 1100px;
       margin: 0 auto;
     }
+
     .features-header {
       text-align: center;
       margin-bottom: 4rem;
     }
+
     .features-header h2 {
-      font-size: 2.2rem; font-weight: 700; letter-spacing: -0.03em;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
       margin-bottom: 0.75rem;
     }
+
     .features-header p {
-      color: var(--text-muted); font-size: 1.1rem;
+      color: var(--text-muted);
+      font-size: 1.1rem;
     }
+
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
     }
+
     .feature-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -197,32 +288,44 @@
       padding: 2rem;
       transition: all 0.3s;
     }
+
     .feature-card:hover {
       border-color: var(--accent);
       background: rgba(167, 139, 250, 0.05);
       transform: translateY(-4px);
     }
+
     .feature-icon {
-      width: 48px; height: 48px;
-      display: flex; align-items: center; justify-content: center;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: var(--accent-dim);
       border-radius: 12px;
       margin-bottom: 1.25rem;
     }
+
     .feature-icon svg {
-      width: 24px; height: 24px;
+      width: 24px;
+      height: 24px;
       stroke: var(--accent);
       fill: none;
       stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
+
     .feature-card h3 {
-      font-size: 1.15rem; font-weight: 600;
+      font-size: 1.15rem;
+      font-weight: 600;
       margin-bottom: 0.5rem;
     }
+
     .feature-card p {
-      color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
     }
 
     /* ── DOWNLOAD ── */
@@ -230,6 +333,7 @@
       padding: 6rem 2rem;
       text-align: center;
     }
+
     .download-box {
       max-width: 640px;
       margin: 0 auto;
@@ -240,40 +344,63 @@
       position: relative;
       overflow: hidden;
     }
+
     .download-box::before {
       content: '';
-      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 300px; height: 2px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 2px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
     }
+
     .download-box h2 {
-      font-size: 2rem; font-weight: 700; letter-spacing: -0.03em;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
       margin-bottom: 0.75rem;
     }
+
     .download-box p {
-      color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
     }
+
     .btn-download {
-      display: inline-flex; align-items: center; gap: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
       padding: 1.1rem 2.5rem;
       background: var(--accent);
       color: #09090b;
       border-radius: 14px;
-      font-size: 1.1rem; font-weight: 700;
+      font-size: 1.1rem;
+      font-weight: 700;
       text-decoration: none;
       transition: all 0.25s;
-      border: none; cursor: pointer;
+      border: none;
+      cursor: pointer;
     }
+
     .btn-download:hover {
       background: #8b5cf6;
       box-shadow: 0 0 40px var(--accent-glow);
       transform: translateY(-2px);
     }
+
     .btn-download svg {
-      width: 22px; height: 22px;
-      fill: none; stroke: currentColor;
-      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
+
     .download-note {
       margin-top: 1.25rem;
       font-size: 0.8rem;
@@ -287,13 +414,20 @@
       text-align: center;
       border-top: 1px solid rgba(63, 63, 70, 0.4);
     }
+
     footer p {
-      color: var(--text-muted); font-size: 0.85rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
     }
+
     footer a {
-      color: var(--accent); text-decoration: none;
+      color: var(--accent);
+      text-decoration: none;
     }
-    footer a:hover { text-decoration: underline; }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
 
     /* ── ANIMATIONS ── */
     .fade-up {
@@ -301,6 +435,7 @@
       transform: translateY(30px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
+
     .fade-up.visible {
       opacity: 1;
       transform: translateY(0);
@@ -308,14 +443,29 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
-      nav { padding: 0.75rem 1.25rem; }
-      .nav-links { gap: 1.25rem; }
-      .features { padding: 4rem 1.25rem; }
-      .download-box { padding: 3rem 1.5rem; }
-      .features-grid { grid-template-columns: 1fr; }
+      nav {
+        padding: 0.75rem 1.25rem;
+      }
+
+      .nav-links {
+        gap: 1.25rem;
+      }
+
+      .features {
+        padding: 4rem 1.25rem;
+      }
+
+      .download-box {
+        padding: 3rem 1.5rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- BACKGROUND ORBS -->
@@ -342,7 +492,12 @@
     <p>Tu música, sin límites. Reproduce, descarga y organiza toda tu música local desde un solo lugar.</p>
     <div class="hero-buttons">
       <a href="#download" class="btn btn-primary">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
         Descargar gratis
       </a>
       <a href="#features" class="btn btn-ghost">Conocer más</a>
@@ -360,7 +515,10 @@
       <!-- Feature 1: YouTube Download -->
       <div class="feature-card fade-up">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <polygon points="10 8 16 12 10 16 10 8" />
+          </svg>
         </div>
         <h3>Descarga de YouTube</h3>
         <p>Descarga cualquier canción de YouTube con un solo click. Rápido, simple y en alta calidad.</p>
@@ -369,7 +527,12 @@
       <!-- Feature 2: Voice Search -->
       <div class="feature-card fade-up">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          <svg viewBox="0 0 24 24">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+            <line x1="12" y1="19" x2="12" y2="23" />
+            <line x1="8" y1="23" x2="16" y2="23" />
+          </svg>
         </div>
         <h3>Búsqueda por voz</h3>
         <p>Encuentra tus canciones favoritas hablando. La búsqueda por voz hace todo más fácil.</p>
@@ -378,7 +541,11 @@
       <!-- Feature 3: Discord Rich Presence -->
       <div class="feature-card fade-up">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><path d="M9 12h.01M15 12h.01"/><path d="M20.3 8.1c-.4-.8-1-1.4-1.6-2C17.1 4.5 14.7 3 12 3s-5.1 1.5-6.7 3.1c-.6.6-1.2 1.2-1.6 2C3.2 9.3 3 10.6 3 12c0 2.8 1.3 5.2 3.3 6.9.5.4 1.1.8 1.7 1.1l-.5 3 3.5-2h2c4.9 0 9-3.6 9-8 0-1.4-.2-2.7-.7-3.9z"/></svg>
+          <svg viewBox="0 0 24 24">
+            <path d="M9 12h.01M15 12h.01" />
+            <path
+              d="M20.3 8.1c-.4-.8-1-1.4-1.6-2C17.1 4.5 14.7 3 12 3s-5.1 1.5-6.7 3.1c-.6.6-1.2 1.2-1.6 2C3.2 9.3 3 10.6 3 12c0 2.8 1.3 5.2 3.3 6.9.5.4 1.1.8 1.7 1.1l-.5 3 3.5-2h2c4.9 0 9-3.6 9-8 0-1.4-.2-2.7-.7-3.9z" />
+          </svg>
         </div>
         <h3>Discord Rich Presence</h3>
         <p>Muestra a tus amigos lo que estás escuchando directamente en tu perfil de Discord.</p>
@@ -387,7 +554,11 @@
       <!-- Feature 4: Spotify Import -->
       <div class="feature-card fade-up">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          <svg viewBox="0 0 24 24">
+            <path d="M9 18V5l12-2v13" />
+            <circle cx="6" cy="18" r="3" />
+            <circle cx="18" cy="16" r="3" />
+          </svg>
         </div>
         <h3>Importar playlists de Spotify</h3>
         <p>Trae tus playlists de Spotify y descárgalas localmente. Tu música, siempre disponible.</p>
@@ -396,7 +567,11 @@
       <!-- Feature 5: Local Player -->
       <div class="feature-card fade-up">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <svg viewBox="0 0 24 24">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+            <line x1="8" y1="21" x2="16" y2="21" />
+            <line x1="12" y1="17" x2="12" y2="21" />
+          </svg>
         </div>
         <h3>Reproductor local nativo</h3>
         <p>Ligero, rápido y diseñado para Windows. Sin navegador, sin cuentas, sin complicaciones.</p>
@@ -410,8 +585,13 @@
     <div class="download-box fade-up">
       <h2>Empieza a escuchar</h2>
       <p>Descarga Lumen gratis y toma el control de tu música.</p>
-      <a href="releases/Lumen%20Setup%201.0.5.exe" class="btn-download" download>
-        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7.5 8.5L12 12l4.5-3.5"/></svg>
+      <a href="https://github.com/Jsshinra/PagLumen/releases/download/Lumen/Lumen.Setup.1.0.5.exe" class="btn-download"
+        download>
+        <svg viewBox="0 0 24 24">
+          <rect x="2" y="3" width="20" height="14" rx="2" />
+          <path d="M8 21h8M12 17v4" />
+          <path d="M7.5 8.5L12 12l4.5-3.5" />
+        </svg>
         Descargar para Windows (.exe)
       </a>
       <p class="download-note">Windows 10/11 · 64-bit · v1.0.5</p>
@@ -439,9 +619,9 @@
     (function () {
       const orbs = document.querySelectorAll('.orb');
       const configs = [
-        { xAmp: 60,  yAmp: 40,  xSpeed: 0.0004, ySpeed: 0.0003, scaleAmp: 0.08, scaleSpeed: 0.0005, opMin: 0.18, opMax: 0.32, opSpeed: 0.0003, phase: 0 },
-        { xAmp: 50,  yAmp: 55,  xSpeed: 0.00035, ySpeed: 0.00045, scaleAmp: 0.06, scaleSpeed: 0.0004, opMin: 0.15, opMax: 0.30, opSpeed: 0.00025, phase: 2.1 },
-        { xAmp: 45,  yAmp: 35,  xSpeed: 0.00045, ySpeed: 0.00035, scaleAmp: 0.07, scaleSpeed: 0.00035, opMin: 0.16, opMax: 0.28, opSpeed: 0.00035, phase: 4.2 },
+        { xAmp: 60, yAmp: 40, xSpeed: 0.0004, ySpeed: 0.0003, scaleAmp: 0.08, scaleSpeed: 0.0005, opMin: 0.18, opMax: 0.32, opSpeed: 0.0003, phase: 0 },
+        { xAmp: 50, yAmp: 55, xSpeed: 0.00035, ySpeed: 0.00045, scaleAmp: 0.06, scaleSpeed: 0.0004, opMin: 0.15, opMax: 0.30, opSpeed: 0.00025, phase: 2.1 },
+        { xAmp: 45, yAmp: 35, xSpeed: 0.00045, ySpeed: 0.00035, scaleAmp: 0.07, scaleSpeed: 0.00035, opMin: 0.16, opMax: 0.28, opSpeed: 0.00035, phase: 4.2 },
       ];
 
       let start = null;
@@ -468,4 +648,5 @@
   </script>
 
 </body>
+
 </html>
