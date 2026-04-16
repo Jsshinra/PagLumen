@@ -1,0 +1,10 @@
+node_modules/
+win-unpacked/
+*.zip
+releases/
+*.dmg
+*.AppImage
+.DS_Store
+.env
+dist/
+build/
