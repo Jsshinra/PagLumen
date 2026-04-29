@@ -252,6 +252,191 @@
       border-color: var(--text-muted);
     }
 
+    /* ── APP PREVIEW ── */
+    .preview {
+      padding: 2rem 2rem 6rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .carousel {
+      position: relative;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+    }
+
+    .preview-frame {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 80px rgba(167, 139, 250, 0.12), 0 40px 80px rgba(0,0,0,0.5);
+    }
+
+    .preview-frame img {
+      width: 100%;
+      display: block;
+    }
+
+    .preview-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(to bottom, transparent 70%, var(--bg) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(9,9,11,0.7);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: border-color 0.2s, color 0.2s;
+      z-index: 10;
+    }
+
+    .carousel-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .carousel-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .carousel-btn-prev { left: -22px; }
+    .carousel-btn-next { right: -22px; }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: background 0.25s, transform 0.25s;
+      border: none;
+      padding: 0;
+    }
+
+    .carousel-dot.active {
+      background: var(--accent);
+      transform: scale(1.4);
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      padding: 6rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .how-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .how-header h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    .how-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .how-steps {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: start;
+      gap: 0;
+    }
+
+    .how-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .how-step-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .how-step h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .how-step p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .how-arrow {
+      color: var(--border);
+      font-size: 1.5rem;
+      padding-top: 1rem;
+      align-self: flex-start;
+    }
+
+    @media (max-width: 640px) {
+      .how-steps {
+        grid-template-columns: 1fr;
+      }
+      .how-arrow {
+        display: none;
+      }
+    }
+
     /* ── FEATURES ── */
     .features {
       padding: 6rem 2rem;
@@ -704,6 +889,85 @@
     </div>
   </section>
 
+  <!-- APP PREVIEW -->
+  <section class="preview">
+    <div class="features-header fade-up" style="margin-bottom:3rem;">
+      <h2>Así se ve Lumen</h2>
+      <p>Limpio, rápido y sin distracciones.</p>
+    </div>
+    <div class="carousel">
+      <button class="carousel-btn carousel-btn-prev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div style="overflow:hidden; border-radius:16px; border:1px solid var(--border); box-shadow:0 0 80px rgba(167,139,250,0.12), 0 40px 80px rgba(0,0,0,0.5);">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <div class="preview-frame" style="border:none; border-radius:0; box-shadow:none;">
+              <img src="preview.png" alt="Librería" draggable="false">
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="preview-frame" style="border:none; border-radius:0; box-shadow:none;">
+              <img src="preview2.png" alt="Búsqueda" draggable="false">
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="preview-frame" style="border:none; border-radius:0; box-shadow:none;">
+              <img src="preview3.png" alt="YouTube Downloader" draggable="false">
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="preview-frame" style="border:none; border-radius:0; box-shadow:none;">
+              <img src="preview4.png" alt="Spotify Downloader" draggable="false">
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-btn carousel-btn-next" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="carousel-dots">
+        <button class="carousel-dot active"></button>
+        <button class="carousel-dot"></button>
+        <button class="carousel-dot"></button>
+        <button class="carousel-dot"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how">
+    <div class="how-header fade-up">
+      <h2>Tres pasos para empezar</h2>
+      <p>Sin cuentas, sin suscripciones, sin complicaciones.</p>
+    </div>
+    <div class="how-steps">
+      <div class="how-step fade-up">
+        <div class="how-step-num">1</div>
+        <div>
+          <h3>Descargá Lumen</h3>
+          <p>Un instalador simple de Windows. Sin bloatware ni configuración complicada.</p>
+        </div>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="how-step fade-up">
+        <div class="how-step-num">2</div>
+        <div>
+          <h3>Agregá tu música</h3>
+          <p>Seleccioná tu carpeta local o descargá directo desde YouTube o Spotify.</p>
+        </div>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="how-step fade-up">
+        <div class="how-step-num">3</div>
+        <div>
+          <h3>Escuchá sin límites</h3>
+          <p>Reproducí, creá playlists, activá el modo radio y mostralo en Discord.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FEATURES -->
   <section class="features" id="features">
     <div class="features-header fade-up">
@@ -955,6 +1219,40 @@
         olderSection.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       }
     });
+
+    // Carousel
+    (function () {
+      const track = document.querySelector('.carousel-track');
+      const dots = document.querySelectorAll('.carousel-dot');
+      const total = dots.length;
+      let current = 0;
+      let autoTimer;
+
+      function goTo(idx) {
+        current = (idx + total) % total;
+        track.style.transform = 'translateX(-' + current * 100 + '%)';
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+
+      document.querySelector('.carousel-btn-prev').addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+      document.querySelector('.carousel-btn-next').addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+      dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); resetAuto(); }));
+
+      function resetAuto() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(() => goTo(current + 1), 4000);
+      }
+
+      // Swipe support
+      let startX = 0;
+      track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend', e => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) { goTo(diff > 0 ? current + 1 : current - 1); resetAuto(); }
+      });
+
+      resetAuto();
+    })();
 
     // Smooth orb animation with organic floating motion
     (function () {
