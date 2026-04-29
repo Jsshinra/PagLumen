@@ -255,105 +255,136 @@
     /* ── APP PREVIEW ── */
     .preview {
       padding: 2rem 2rem 6rem;
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 0 auto;
       text-align: center;
     }
 
-    .carousel {
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+    }
+
+    .preview-thumb {
       position: relative;
-    }
-
-    .carousel-track {
-      display: flex;
-      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .carousel-slide {
-      min-width: 100%;
-    }
-
-    .preview-frame {
-      position: relative;
-      border-radius: 16px;
+      border-radius: 10px;
       overflow: hidden;
       border: 1px solid var(--border);
-      box-shadow: 0 0 80px rgba(167, 139, 250, 0.12), 0 40px 80px rgba(0,0,0,0.5);
+      cursor: pointer;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
     }
 
-    .preview-frame img {
+    .preview-thumb:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 0 30px rgba(167, 139, 250, 0.2);
+    }
+
+    .preview-thumb img {
       width: 100%;
       display: block;
     }
 
-    .preview-frame::before {
-      content: '';
+    .preview-thumb-overlay {
       position: absolute;
       inset: 0;
-      border-radius: 16px;
-      background: linear-gradient(to bottom, transparent 70%, var(--bg) 100%);
-      pointer-events: none;
-      z-index: 1;
+      background: rgba(167, 139, 250, 0.0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.25s;
     }
 
-    .carousel-btn {
+    .preview-thumb-overlay svg {
+      width: 28px;
+      height: 28px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .preview-thumb:hover .preview-thumb-overlay {
+      background: rgba(167, 139, 250, 0.15);
+    }
+
+    .preview-thumb:hover .preview-thumb-overlay svg {
+      opacity: 1;
+    }
+
+    @media (max-width: 640px) {
+      .preview-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 88vh;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 80px rgba(167, 139, 250, 0.2), 0 40px 80px rgba(0,0,0,0.7);
+      transform: scale(0.92);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .lightbox.open .lightbox-img {
+      transform: scale(1);
+    }
+
+    .lightbox-close {
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      background: rgba(9,9,11,0.7);
+      background: rgba(9,9,11,0.8);
       border: 1px solid var(--border);
       color: var(--text-muted);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      backdrop-filter: blur(8px);
       transition: border-color 0.2s, color 0.2s;
-      z-index: 10;
     }
 
-    .carousel-btn:hover {
+    .lightbox-close:hover {
       border-color: var(--accent);
       color: var(--accent);
     }
 
-    .carousel-btn svg {
+    .lightbox-close svg {
       width: 18px;
       height: 18px;
-      fill: none;
       stroke: currentColor;
+      fill: none;
       stroke-width: 2;
       stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .carousel-btn-prev { left: -22px; }
-    .carousel-btn-next { right: -22px; }
-
-    .carousel-dots {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .carousel-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--border);
-      cursor: pointer;
-      transition: background 0.25s, transform 0.25s;
-      border: none;
-      padding: 0;
-    }
-
-    .carousel-dot.active {
-      background: var(--accent);
-      transform: scale(1.4);
     }
 
     /* ── HOW IT WORKS ── */
@@ -871,7 +902,7 @@
   <section class="hero">
     <div class="hero-badge">
       <span class="dot"></span>
-      v1.1.4 disponible ahora
+      v1.1.5 disponible ahora
     </div>
     <h1>Lumen</h1>
     <p>Tu música, sin límites. Reproduce, descarga y organiza toda tu música local desde un solo lugar.</p>
@@ -895,45 +926,41 @@
       <h2>Así se ve Lumen</h2>
       <p>Limpio, rápido y sin distracciones.</p>
     </div>
-    <div class="carousel">
-      <button class="carousel-btn carousel-btn-prev" aria-label="Anterior">
-        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <div style="overflow:hidden; border-radius:16px; border:1px solid var(--border); box-shadow:0 0 80px rgba(167,139,250,0.12), 0 40px 80px rgba(0,0,0,0.5);">
-        <div class="carousel-track">
-          <div class="carousel-slide">
-            <div class="preview-frame" style="border:none; border-radius:0; box-shadow:none;">
-              <img src="preview.png" alt="Librería" draggable="false">
-            </div>
-          </div>
-          <div class="carousel-slide">
-            <div class="preview-frame" style="border:none; border-radius:0; box-shadow:none;">
-              <img src="preview2.png" alt="Búsqueda" draggable="false">
-            </div>
-          </div>
-          <div class="carousel-slide">
-            <div class="preview-frame" style="border:none; border-radius:0; box-shadow:none;">
-              <img src="preview3.png" alt="YouTube Downloader" draggable="false">
-            </div>
-          </div>
-          <div class="carousel-slide">
-            <div class="preview-frame" style="border:none; border-radius:0; box-shadow:none;">
-              <img src="preview4.png" alt="Spotify Downloader" draggable="false">
-            </div>
-          </div>
+    <div class="preview-grid fade-up">
+      <div class="preview-thumb" onclick="openLightbox('preview.png','Librería')">
+        <img src="preview.png" alt="Librería" draggable="false">
+        <div class="preview-thumb-overlay">
+          <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
         </div>
       </div>
-      <button class="carousel-btn carousel-btn-next" aria-label="Siguiente">
-        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
-      <div class="carousel-dots">
-        <button class="carousel-dot active"></button>
-        <button class="carousel-dot"></button>
-        <button class="carousel-dot"></button>
-        <button class="carousel-dot"></button>
+      <div class="preview-thumb" onclick="openLightbox('preview2.png','Búsqueda')">
+        <img src="preview2.png" alt="Búsqueda" draggable="false">
+        <div class="preview-thumb-overlay">
+          <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </div>
+      </div>
+      <div class="preview-thumb" onclick="openLightbox('preview3.png','YouTube Downloader')">
+        <img src="preview3.png" alt="YouTube Downloader" draggable="false">
+        <div class="preview-thumb-overlay">
+          <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </div>
+      </div>
+      <div class="preview-thumb" onclick="openLightbox('preview4.png','Spotify Downloader')">
+        <img src="preview4.png" alt="Spotify Downloader" draggable="false">
+        <div class="preview-thumb-overlay">
+          <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+    <button class="lightbox-close" onclick="closeLightbox()">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
 
   <!-- HOW IT WORKS -->
   <section class="how">
@@ -1171,7 +1198,7 @@
     <div class="download-box fade-up">
       <h2>Empieza a escuchar</h2>
       <p>Descarga Lumen gratis y toma el control de tu música.</p>
-      <a href="https://github.com/Jsshinra/PagLumen/releases/download/Lumen/Lumen.Setup.1.1.4.exe" class="btn-download"
+      <a href="https://github.com/Jsshinra/PagLumen/releases/download/Lumen/Lumen.Setup.1.1.5.exe" class="btn-download"
         download>
         <svg viewBox="0 0 24 24">
           <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -1180,7 +1207,7 @@
         </svg>
         Descargar para Windows (Setup)
       </a>
-      <p class="download-note">Windows 10/11 · 64-bit · v1.1.4</p>
+      <p class="download-note">Windows 10/11 · 64-bit · v1.1.5</p>
     </div>
   </section>
 
